@@ -1,0 +1,205 @@
+Question 1: Can you get all data about movies?
+=>
+[(43597,
+  'Avatar',
+  237000000,
+  150,
+  '2009-12-10',
+  2787965087,
+  'Avatar',
+  7.2,
+  11800,
+  'In the 22nd century, a paraplegic Marine is dispatched to the moon Pandora on a unique mission, but becomes torn between following orders and protecting an alien civilization.',
+  'Enter the World of Pandora.',
+  19995,
+  4762),
+ (43598,
+  "Pirates of the Caribbean: At World's End",
+  300000000,
+  139,
+  '2007-05-19',
+  961000000,
+  "Pirates of the Caribbean: At World's End",
+  6.9,
+  4500,
+  'Captain Barbossa, long believed to be dead, has come back to life and is headed to the edge of the Earth with Will Turner and Elizabeth Swann. But nothing is quite as it seems.',
+  'At the end of the world, the adventure begins.',
+  285,
+  4763),
+ (43599,
+  'Spectre',
+  245000000,
+  107,
+  '2015-10-26',
+  880674609,
+  'Spectre',
+  6.3,
+  4466,
+  'A cryptic message from Bond’s past sends him on a trail to uncover a sinister organization. While M battles political forces to keep the secret service alive, Bond peels back the layers of deceit to reveal the terrible truth behind SPECTRE.',
+  'A Plan No One Escapes',
+  206647,
+  4764),
+ (43600,
+  'The Dark Knight Rises',
+  250000000,
+  112,
+  '2012-07-16',
+  1084939099,
+...
+  "A highly-evolved planet, whose denizens feel no emotion and reproduce by cloning, plans to take over Earth from the inside by sending an operative, fashioned with a humming, mechanical penis, to impregnate an earthling and stay until the birth. The alien, Harold Anderson, goes to Phoenix as a banker and sets to work finding a mate. His approaches to women are inept, and the humming phallus doesn't help, but on the advice of a banking colleague, he cruises an AA meeting, meets Susan, and somehow convinces her to marry. The clock starts to tick: will she conceive, have a baby, and lose Harold (and the child) to his planet before he discovers emotion and starts to care?",
+  "To save his planet, an alien must find a woman on Earth to have his baby. There's just one problem.",
+  10416,
+  5031),
+ ...]
+
+
+Question 2: How do you get all data about directors?
+=>cur.execute("select * from directors")
+  directors=cur.fetchall()
+directors=pd.DataFrame(directors,columns=['name','id','gender','uid','department'])
+directors.head()
+
+
+Question 3: Check how many movies are present in iMDB.
+=>the number of movies present in the IMDB database are 4773
+
+
+Question 4: Find these 3 directors: James Cameron ; Luc Besson ; John Woo
+=>these 3 director data are:[('James Cameron', 4762, 2, 2710, 'Directing'), ('John Woo', 4893, 2, 11401, 'Directing'), ('Luc Besson', 4949, 2, 59, 'Directing')]
+
+
+Question 5: Find all directors with name starting with Steven.
+=>the director whose names are starting with the wors steven[('Steven Spielberg', 4799, 2, 488, 'Directing'), ('Steven Soderbergh', 4909, 2, 1884, 'Directing'), ('Steven Brill', 5013, 2, 32593, 'Directing'), ('Steven Zaillian', 5117, 2, 2260, 'Directing'), ('Steven Quale', 5216, 2, 93214, 'Directing'), ('Steven Seagal', 5221, 2, 23880, 'Directing'), ('Steven E. de Souza', 5390, 2, 1726, 'Directing'), ('Steven Shainberg', 5803, 2, 67795, 'Directing'), ('Steven R. Monroe', 6713, 2, 88039, 'Directing')]
+
+
+
+Question 6: Count female directors.
+=>the number of female directors are 150
+
+
+
+Question 7: Find the name of the 10th first women directors?
+=>the name of the 10th women is Angelina Jolie
+
+
+
+Question 8: What are the 3 most popular movies?
+=>3 most popular movies are Minions Interstellar Deadpool 
+
+
+
+Question 9: What are the 3 most bankable movies?
+=>
+3 most bankable movies:Pirates of the Caribbean: On Stranger Tides , Pirates of the Caribbean: At World's End , Avengers: Age of Ultron
+
+
+Question 10: What is the most awarded average vote since the January 1st, 2000?
+=>most popluar movie since jan 2000 is: Sardaarji
+
+
+
+Question 11: Which movie(s) were directed by Brenda Chapman?
+=>brenda chapman directed movie : Brave
+
+
+
+Question 12: Whose director made the most movies?
+=>the director who made the most the most movies 'Steven Spielberg'
+
+
+
+Question 13: Whose director is the most bankable?
+=>the most bankable director is Steven Spielberg
+
+
+			# Budget analysis 
+
+
+Question 14: find top 10 revenue making movies
+=>top_10_revenue=pd.DataFrame(lis_10,columns=['id', 'original_title', 'budget', 'popularity', 'release_date',
+       'revenue', 'title', 'vote_average', 'vote_count', 'overview', 'tagline',
+       'uid', 'director_id'])
+top_10_revenue
+
+			
+
+Question 14: find the movies with highest vote_avg
+=>cur.execute('''
+            SELECT * FROM movies
+            ORDER BY vote_average desc limit 10
+            ''')
+lis_10_popular=cur.fetchall()
+lis_10_popular=pd.DataFrame(lis_10_popular,columns=['id', 'original_title', 'budget', 'popularity', 'release_date',
+       'revenue', 'title', 'vote_average', 'vote_count', 'overview', 'tagline',
+       'uid', 'director_id'])
+lis_10_popular
+
+
+
+			# director analysis
+
+Question 15: name all the director with the number of movies and revenue
+=>
+name	count_movies	revenue
+0	Steven Spielberg	27	9147393164
+1	Peter Jackson	9	6498642820
+2	James Cameron	7	5883569439
+3	Michael Bay	12	5832524638
+4	Christopher Nolan	8	4227483234
+5	Chris Columbus	11	3725631503
+6	Robert Zemeckis	13	3590622002
+7	George Lucas	5	3339113893
+8	Tim Burton	14	3337418241
+9	Ridley Scott	16	3189557997
+
+
+
+
+Question 16: name all the directors with number of movies and revenue order by movie count
+=>
+name	count_movies	revenue
+0	Steven Spielberg	27	9147393164
+1	Woody Allen	21	669101038
+2	Martin Scorsese	20	1956635998
+3	Clint Eastwood	20	2512058888
+4	Spike Lee	16	340618771
+5	Robert Rodriguez	16	1109899581
+6	Ridley Scott	16	3189557997
+7	Steven Soderbergh	15	2114864443
+8	Renny Harlin	15	1031500590
+9	Tim Burton	14	3337418241
+
+
+Question 17: give the title of the movie relaese date budget revenue popularity , vote_average
+made by Steven Spielberg
+=>
+
+original_title	release_date	budget	popularity	vote_count
+0	Indiana Jones and the Kingdom of the Crystal S...	2008-05-21	185000000	75	2495
+1	The BFG	2016-06-01	140000000	44	1000
+2	War of the Worlds	2005-06-28	132000000	48	2322
+3	The Adventures of Tintin	2011-10-25	130000000	89	2061
+4	Minority Report	2002-06-20	102000000	65	2608
+5	A.I. Artificial Intelligence	2001-06-29	100000000	34	1974
+6	The Lost World: Jurassic Park	1997-05-23	73000000	2	2487
+7	The Terminal	2004-06-17	60000000	57	1910
+8	Munich	2005-12-22	70000000	29	696
+9	Hook	1991-12-11	70000000	33	1532
+10	War Horse	2011-12-25	66000000	29	992
+11	Saving Private Ryan	1998-07-24	70000000	76	5048
+12	Lincoln	2012-11-09	65000000	36	1429
+13	Jurassic Park	1993-06-11	63000000	40	4856
+14	Catch Me If You Can	2002-12-25	52000000	73	3795
+15	Indiana Jones and the Last Crusade	1989-05-24	48000000	80	3152
+16	Bridge of Spies	2015-10-15	40000000	48	2583
+17	Amistad	1997-12-03	36000000	3	316
+18	1941	1979-12-13	35000000	10	143
+19	Indiana Jones and the Temple of Doom	1984-05-23	28000000	66	2781
+20	Schindler's List	1993-11-29	22000000	104	4329
+21	Raiders of the Lost Ark	1981-06-12	18000000	68	3854
+22	Close Encounters of the Third Kind	1977-11-16	20000000	52	1098
+23	The Color Purple	1985-12-18	15000000	17	338
+24	Jaws	1975-06-18	7000000	50	2542
+25	E.T. the Extra-Terrestrial	1982-04-03	10500000	56	3269
+26	Twilight Zone: The Movie	1983-06-24	10000000	12	161
+
